@@ -12,7 +12,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthController extends Controller
 {
-    public function signUp(Request $request)
+    public function register(Request $request)
     {
         //Validate data with laravel built in Validator
         $validator = Validator::make($request->all(), [
@@ -62,12 +62,12 @@ class AuthController extends Controller
         }
     }
 
-    public function signIn(Request $request)
+    public function login(Request $request)
     {
         //validate data
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required|password',
+            'email' => 'required',
+            'password' => 'required',
         ], [
             'email.required' => 'Email can not empty!',
             'password.required' => 'Password can not empty!',
@@ -75,22 +75,32 @@ class AuthController extends Controller
         if($validator->fails()) {
             return response()->json([
                 'success' => false,
-                'message' => 'All input data must be filled',
-                'data'    => $validator->errors()
+                'message' => $validator->messages(),
+                'error'    => $validator->errors()
             ],401);
         }
         else {
-            // user authentication
-            $credentials = $request->only('email', 'password');
-    
+            // return JWT token
             try {
-                if (!$token = JWTAuth::attempt($credentials)) {
-                    return response()->json(['error' => 'invalid_credentials'], 400);
+                // create token
+                $token = JWTAuth::attempt($request->only('email','password'));
+                if (!$token) {
+                    return response()->json([
+                        'success' => 'false',
+                        'error' => 'invalid_credentials'
+                    ], 400);
                 }
-            } catch (JWTException $e) {
-                return response()->json(['error' => 'could_not_create_token'], 500);
+                return response()->json([
+                    'success' => 'false',
+                    'token' => compact('token')
+                ], 200);
+            } 
+            catch (JWTException $e) {
+                return response()->json([
+                    'success' => 'false',
+                    'error' => 'could_not_create_token'
+                ], 500);
             }
-           return response()->json(compact('token'));
         }
     }
 
@@ -98,18 +108,16 @@ class AuthController extends Controller
     {
         // user authorization
         try {
-
             if (!$user = JWTAuth::parseToken()->authenticate()) {
-                return response()->json(['user_not_found'], 404);
+                return response()->json([
+                    'message' => 'user_not_found'
+                ], 404);
             }
         } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
-
             return response()->json(['token_expired'], $e->getStatusCode());
         } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
-
             return response()->json(['token_invalid'], $e->getStatusCode());
         } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
-
             return response()->json(['token_absent'], $e->getStatusCode());
         }
 

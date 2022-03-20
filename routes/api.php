@@ -6,9 +6,9 @@ use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\UserDataController;
 
 // New User Register (Sign Up Admin or User)
-Route::post('/register', [AuthController::class,'signUp']);
+Route::post('/register', [AuthController::class,'register']);
 // User Authentication (Sign In Admin or User)
-Route::post('/login','AuthController@signIn');
+Route::post('/login',[AuthController::class,'login']);
 // User Authorization to Dashboard (JWT Token Verification)
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -18,10 +18,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/user/all', [UserDataController::class,'getAllUser']);
 // Get user data data by id
 Route::get('/user/{id}', [UserDataController::class,'findById']);
-// Edit User Data (Admin and User)
-Route::put('/user/{id}','UserDataController@editUserData');
-// Delete User Data (Admin Only)
-Route::delete('/user/{id}','UserDataController@deleteUserData');
+// Edit user Data by id
+Route::put('/user/{id}', [UserDataController::class, 'editUserById']);
+// Delete User Data
+Route::delete('/user/{id}',[UserDataController::class, 'deleteUserById']);
 
 // Get All Data
 Route::get('/data','api\DataController@getAll');

@@ -13,10 +13,9 @@ class UserDataController extends Controller
     */
     public function getAllUser()
     {
-        // assign users_db to variable users_data
         $users_data = User::all();
         return response()->json([
-            'message' => 'success',
+            'success' => 'true',
             'data' => $users_data
         ], 200);
     }
@@ -29,37 +28,51 @@ class UserDataController extends Controller
         // assign users_db to variable users_data
         $user_data = User::find($id);
         return response()->json([
-            'message' => 'success',
+            'success' => 'true',
             'data' => $user_data
         ], 200);
     }
     /**
-    * Edit user data.
-    *
+    * Edit user data by id.
     * @param  \Illuminate\Http\Request  $request, $id
     * @return \Illuminate\Http\Response
     */
-    public function editUserData(request $request, $id)
+    public function editUserById(request $request, $id)
     {
-        $title=$request->title;
-        $slug=$request->slug;
-        $content=$request->content;
-        // find id
-        $post=User::find($id);
-        $post->title=$title;
-        $post->slug=$slug;
-        $post->content=$content;
-        // save
-        $post->save();   
-        return "Data berhasil di update";
+        $user_data = User::find($id);
+        // update user data
+        $user_data->name = $request->name;
+        $user_data->password = $request->password;
+        $user_data->gender = $request->gender;
+        $user_data->role = $request->role;
+        // save updated user data
+        $user_data->update();   
+        // if create new user success
+        if ($user_data) {
+            return response()->json([
+                'success' => true,
+                'user' => $user_data
+            ], 200);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Fail to update user',
+        ], 500);
     }
-
-    public function deleteUserDataById($id)
+    /**
+    * Delete user by id.
+    * @param  \Illuminate\Http\Request  $request, $id
+    * @return \Illuminate\Http\Response
+    */
+    public function deleteUserById($id)
     {
-        $post=user_db::find($id);
+        $user_data=User::find($id);
         // delete
-        $post->delete();
-        return "Data berhasil di hapus";
+        $user_data->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'Success delete user'
+        ], 200);
     }
 
 }

@@ -21,14 +21,23 @@ This portfolio is open-sourced software licensed under the [MIT license](https:/
 
 ## Reference
 
-1.) https://www.fundaofwebit.com/laravel-8/how-to-fetch-data-from-database-in-laravel
+1.) Retrieve all data from database and get data by id
+https://www.fundaofwebit.com/laravel-8/how-to-fetch-data-from-database-in-laravel
+2.) Add existing project to Github
+https://www.digitalocean.com/community/tutorials/how-to-push-an-existing-project-to-github
 
 ## Error
 
 When build this portfolio, I found several error, there are :
+
 1.) SQLSTATE[01000]: Warning: 1265 Data truncated for column 'role'
 Solution : https://www.javatpoint.com/mysql-enum#:~:text=The%20ENUM%20data%20type%20in%20MySQL%20is%20a,may%20have%20one%20of%20the%20specified%20possible%20values.
 2.) Target Class does not exist
 Solution : https://laravel.com/docs/8.x/releases
 3.) BadMethodCallException: Call to undefined method App\Models\User::table()
 Solution : https://www.fundaofwebit.com/laravel-8/how-to-fetch-data-from-database-in-laravel
+4.) Error install tymon/jwt-auth : https://stackoverflow.com/questions/46826908/composer-could-not-install-tymon-jwt-auth
+5.) In ProviderRepository.php line 208:
+Class "Tymon\JWTAuth\Providers\JWTAuthServiceProvider" not found
+Solution : https://codeinhouse.com/laravel-7-jwt-authentication-tymon-auth/
+6.) Tymon\\JWTAuth\\JWT::fromUser(): Argument #1 ($user) must be of type Tymon\\JWTAuth\\Contracts\\JWTSubject, App\\Models\\User given, called in C:\\Users\\asus\\Documents\\xampp\\htdocs\\laravel-app\\vendor\\tymon\\jwt-auth\\src\\JWTAuth.php on line 54
