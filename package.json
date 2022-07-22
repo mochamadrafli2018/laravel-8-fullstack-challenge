@@ -1,5 +1,6 @@
 {
-    "private": true,
+    "private": false,
+    "author": "mochamad-rafli-ramadhan",
     "scripts": {
         "dev": "npm run development",
         "development": "mix",

@@ -2,34 +2,19 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\api\AuthController;
-use App\Http\Controllers\api\UserDataController;
+use App\Http\Controllers\api\MaterialController;
+use App\Http\Controllers\api\TypeController;
 
-// New User Register (Sign Up Admin or User)
-Route::post('/register', [AuthController::class,'register']);
-// User Authentication (Sign In Admin or User)
-Route::post('/login',[AuthController::class,'login']);
-// User Authorization to Dashboard (JWT Token Verification)
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('/material/',[MaterialController::class,'newMaterial']);
+Route::get('/material/',[MaterialController::class,'getAllMaterial']);
+Route::get('/material/',[MaterialController::class,'getAllMaterial']);
+Route::get('/material/{id}',[MaterialController::class,'findMaterialById']);
+Route::delete('/material/{id}',[MaterialController::class, 'deleteMaterialById']);
+Route::delete('/material',[MaterialController::class, 'deleteAllMaterial']);
 
-// Retrieve all user data
-Route::get('/user/all', [UserDataController::class,'getAllUser']);
-// Get user data data by id
-Route::get('/user/{id}', [UserDataController::class,'findById']);
-// Edit user Data by id
-Route::put('/user/{id}', [UserDataController::class, 'editUserById']);
-// Delete User Data
-Route::delete('/user/{id}',[UserDataController::class, 'deleteUserById']);
-
-// Get All Data
-Route::get('/data','api\DataController@getAll');
-// Create New Data
-Route::post('/data','api\DataController@createNewData');
-// Get Data By Id
-Route::get('/data/{id}','api\DataController@findById');
-// Edit Data
-Route::put('/data/{id}','api\DataController@findandUpdateById');
-// Delete Data'
-Route::delete('/data/{id}','api\DataController@findandRemoveById');
+Route::post('/types/',[TypeController::class,'newTypeData']);
+Route::get('/types/',[TypeController::class,'getAllTypeData']);
+Route::get('/types/',[TypeController::class,'getAllTypeData']);
+Route::get('/types/{id}',[TypeController::class,'findTypeDataById']);
+Route::delete('/types/{id}',[TypeController::class, 'deleteTypeDataById']);
+Route::delete('/types',[TypeController::class, 'deleteAllTypeData']);

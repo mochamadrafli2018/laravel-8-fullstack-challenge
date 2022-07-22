@@ -26,18 +26,35 @@ https://www.fundaofwebit.com/laravel-8/how-to-fetch-data-from-database-in-larave
 2.) Add existing project to Github
 https://www.digitalocean.com/community/tutorials/how-to-push-an-existing-project-to-github
 
-## Error
+## Error Documentation
 
-When build this portfolio, I found several error, there are :
+Several solved error documentation :
 
 1.) SQLSTATE[01000]: Warning: 1265 Data truncated for column 'role'
+
 Solution : https://www.javatpoint.com/mysql-enum#:~:text=The%20ENUM%20data%20type%20in%20MySQL%20is%20a,may%20have%20one%20of%20the%20specified%20possible%20values.
+
 2.) Target Class does not exist
+
 Solution : https://laravel.com/docs/8.x/releases
+
 3.) BadMethodCallException: Call to undefined method App\Models\User::table()
+
 Solution : https://www.fundaofwebit.com/laravel-8/how-to-fetch-data-from-database-in-laravel
-4.) Error install tymon/jwt-auth : https://stackoverflow.com/questions/46826908/composer-could-not-install-tymon-jwt-auth
+
+4.) Error install tymon/jwt-auth
+
+Solution : https://stackoverflow.com/questions/46826908/composer-could-not-install-tymon-jwt-auth
+
 5.) In ProviderRepository.php line 208:
 Class "Tymon\JWTAuth\Providers\JWTAuthServiceProvider" not found
+
 Solution : https://codeinhouse.com/laravel-7-jwt-authentication-tymon-auth/
-6.) Tymon\\JWTAuth\\JWT::fromUser(): Argument #1 ($user) must be of type Tymon\\JWTAuth\\Contracts\\JWTSubject, App\\Models\\User given, called in C:\\Users\\asus\\Documents\\xampp\\htdocs\\laravel-app\\vendor\\tymon\\jwt-auth\\src\\JWTAuth.php on line 54
+
+6.) Class "Router" not found
+
+Solution: Routes in laravel are written using "Route" not "Routes" in routes/api.php
+
+7.) Class App\Http\Controllers\API\UserController does not exist
+
+Solution : Make sure the controller name in line `class ControllerName extends Controller` is same with controller name used in `routes/api.php`

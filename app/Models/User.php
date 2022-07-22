@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Models
 {
     use HasFactory, Notifiable;
 
@@ -16,8 +16,15 @@ class User extends Authenticatable
      *
      * @var string
      */
-    protected $table = 'user_db';
+    protected $table = 'users';
     
+    /**
+     * The primary key associated with the table
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -46,6 +53,13 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        //'email_verified_at' => 'datetime',
+        // 'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    protected $timestamps = true;
 }
