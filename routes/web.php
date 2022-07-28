@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Posts;
+use App\Http\Controllers\MaterialController;
+use App\Http\Controllers\TypeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,14 +14,5 @@ use App\Posts;
 |
 */
 
-// return file from index\welcome.blade.php
-Route::get('/', function () {
-    return view('posts.welcome');
-});
-// return file from layout\navbar.blade.php
-Route::get('/nav', function () {
-    return view('layout.navbar');
-});
-
-// Route::resource('/post','PostsController@index');
-// Route::get('/post','PostsController@index');
+Route::get('/',[TypeController::class,'index']);
+Route::get('/items',[TypeController::class,'items']);

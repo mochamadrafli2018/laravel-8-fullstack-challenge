@@ -1,60 +1,97 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Waste4Change Internship Technical Test Challenge #2 using PHP Framework
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Laravel Command
 
-## Database Create Table and Migration
+### Running
+
+`php artisan serve`
+
+### Create Model
+
+`php artisan make:model model_name`
+
+### Create Controller
+
+`php artisan make:controller controller_name`
+
+### Database Migration
+
+1. Create migration file
 
 `php artisan make:migration users_table`
 
-New file will be make automatically in path ./database/migrations. Then to migrate all of the migration table write this command below on prompt.
+2. Do migration
 
 `php artisan migrate`
 
-## License
+## Routes
 
-This portfolio is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Web Routes
+
+1. Index Page
+
+`localhost:8080`
+
+2. Items Page
+
+`localhost:8080/items`
+
+### Api Routes
+
+1. GET All Data, CREATE All Data and DELETE All Data
+
+- Materials REST API
+
+`localhost:8000/api/materials`
+
+- Types REST API
+
+`localhost:8000/api/types`
+
+2. GET Data By Id, PUT Data By Id and DELETE Data By Id
+
+- Materials REST API
+
+`localhost:8000/api/materials/{id}`
+
+- Types REST API
+
+`localhost:8000/api/types/{id}`
 
 ## Reference
 
-1.) Retrieve all data from database and get data by id
-https://www.fundaofwebit.com/laravel-8/how-to-fetch-data-from-database-in-laravel
-2.) Add existing project to Github
-https://www.digitalocean.com/community/tutorials/how-to-push-an-existing-project-to-github
+1. Update Data
+
+https://stackoverflow.com/questions/69804562/modelupdate-should-not-be-called-statically
 
 ## Error Documentation
 
 Several solved error documentation :
 
-1.) SQLSTATE[01000]: Warning: 1265 Data truncated for column 'role'
+1. SQLSTATE[01000]: Warning: 1265 Data truncated for column '...'
 
 Solution : https://www.javatpoint.com/mysql-enum#:~:text=The%20ENUM%20data%20type%20in%20MySQL%20is%20a,may%20have%20one%20of%20the%20specified%20possible%20values.
 
-2.) Target Class does not exist
+2. Target Class does not exist
 
 Solution : https://laravel.com/docs/8.x/releases
 
-3.) BadMethodCallException: Call to undefined method App\Models\User::table()
+3. BadMethodCallException: Call to undefined method App\Models\User::table()
 
 Solution : https://www.fundaofwebit.com/laravel-8/how-to-fetch-data-from-database-in-laravel
 
-4.) Error install tymon/jwt-auth
+4. Error: Class &quot;App\Http\Controllers\api\Material&quot; not found
 
-Solution : https://stackoverflow.com/questions/46826908/composer-could-not-install-tymon-jwt-auth
+Solution : Name of table in MaterialController.php should match with name of table in MaterialModel.php
 
-5.) In ProviderRepository.php line 208:
-Class "Tymon\JWTAuth\Providers\JWTAuthServiceProvider" not found
+5. Error: Class &quot;App\Models\Models&quot; not found
 
-Solution : https://codeinhouse.com/laravel-7-jwt-authentication-tymon-auth/
+Solution : Delete model file and make new model using `php artisan make:model model_name`
 
-6.) Class "Router" not found
+6. SQLSTATE[42S22]: Column not found: 1054 Unknown column 'updated_at' in 'field list'
 
-Solution: Routes in laravel are written using "Route" not "Routes" in routes/api.php
+Solution : https://stackoverflow.com/questions/28277955/laravel-unknown-column-updated-at
 
-7.) Class App\Http\Controllers\API\UserController does not exist
+7. Call to a member function delete() on null
 
-Solution : Make sure the controller name in line `class ControllerName extends Controller` is same with controller name used in `routes/api.php`
+Solution : https://stackoverflow.com/questions/58480624/call-to-a-member-function-delete-on-null#:~:text=Call%20to%20a%20member%20function%20delete%20%28%29%20on,is%20%24id.%20so%20your%20%24post%20varaiable%20is%20null.
