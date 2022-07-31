@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Material;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class MaterialController extends Controller
 {   
@@ -17,12 +18,10 @@ class MaterialController extends Controller
     {
         // Validate data with built in validator
         $validator = Validator::make($request->all(), [
-                // check if id in table is already exist with unique:table_name
-                'id' => 'required|string|max:255|unique:materials_db',
-                'name' => 'required|string|max:255',
+                // check if name in table is already exist with unique:table_name
+                'name' => 'required|string|max:255|unique:materials_db',
             ],
             [
-                'id.required' => 'id can not be empty!',
                 'name.required' => 'Name can not be empty!',
             ]
         );
@@ -33,9 +32,21 @@ class MaterialController extends Controller
                 'error'    => $validator->errors()
             ],400);
         }
+        // generate id
+        $id_generator = IdGenerator::generate([
+            'table' => 'materials_db',
+            'length' => 7,
+            'prefix' => 'MAT-'
+        ]);
+        // get shorten of name
+        $string = $request->input('name');
+        $upper_case = strtoupper($string);
+        $string = substr($upper_case, 0, 3);
+        // final id
+        $id = $id_generator."-".$string;
         // create new Material data
         $new_data = Material::create([
-            'id' => $request->input('id'),
+            'id' => $id,
             'name' => $request->input('name'),
         ]);
         // if create new Material success
@@ -86,10 +97,10 @@ class MaterialController extends Controller
     */
     public function findByName(request $request, $name) 
     {
-        $data = Material::where('name', $name)->get();
+        $data = Material::where('name', $name)->get("id")[0]->id;
         if ($data) {
             return response()->json([
-                'type' => $data
+                "id" => $data
             ], 200);
         }
         return response()->json([
@@ -108,11 +119,11 @@ class MaterialController extends Controller
         if ($data) {
             // update data
             $data->update([
-                'id' => $request->input('id'),
                 'name' => $request->input('name'),
             ]);
             // if data was updated
             return response()->json([
+                'updated_data' => $data,
                 'message' => 'Success update data'
             ], 200);
         }

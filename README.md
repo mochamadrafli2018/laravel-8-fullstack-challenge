@@ -64,6 +64,14 @@
 
 https://stackoverflow.com/questions/69804562/modelupdate-should-not-be-called-statically
 
+2. Id Generator
+
+https://laravelarticle.com/laravel-custom-id-generator
+
+3. Concatenate String
+
+https://www.positronx.io/php-concatenate-string-variable-arrays-examples/#:~:text=You%20can%20combine%20two%20strings%20in%20PHP%20using,Result%3A%20John%20Doe%20Concatenate%20Two%20Variables%20in%20PHP
+
 ## Error Documentation
 
 Several solved error documentation :
